@@ -39,7 +39,7 @@ input[type="text"], input[type="color"] {
 #attendanceTable th, #attendanceTable td {
     resize: horizontal;
     overflow: auto;
-    min-width: 100px;
+    min-width: 150px;
 }
 
 .table-responsive {
