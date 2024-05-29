@@ -14,7 +14,6 @@ function login() {
         document.getElementById('loginForm').classList.add('d-none');
         document.getElementById('attendanceApp').classList.remove('d-none');
         loginError.textContent = '';
-        $('#attendanceTable').resizableColumns();
     } else {
         loginError.textContent = 'Identifiant ou mot de passe incorrect';
     }
@@ -27,6 +26,36 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     initialData.forEach(student => addRow(student));
+});
 
-    document.getElementById('tableTitle').addEventListener('input', (event) => {
-        document.getElementById('dynamicTitle').text
+function addRow(student = { name: '', phone: '', email: '' }) {
+    const table = document.getElementById('attendanceTable').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    const nameCell = newRow.insertCell(0);
+    const phoneCell = newRow.insertCell(1);
+    const emailCell = newRow.insertCell(2);
+    nameCell.innerHTML = `<input type="text" class="form-control" value="${student.name}">`;
+    phoneCell.innerHTML = `<input type="text" class="form-control" value="${student.phone}">`;
+    emailCell.innerHTML = `<input type="text" class="form-control" value="${student.email}">`;
+
+    for (let i = 3; i < 11; i++) {
+        const cell = newRow.insertCell(i);
+        cell.innerHTML = `
+            <select class="form-control select-presence">
+                <option value="Présent">Présent</option>
+                <option value="Absent">Absent</option>
+            </select>
+        `;
+    }
+}
+
+function updateTableTitle() {
+    const title = document.getElementById('tableTitle').value;
+    document.getElementById('dynamicTitle').textContent = title;
+}
+
+function changeTableColor() {
+    const color = document.getElementById('colorPicker').value;
+    document.getElementById('attendanceTable').style.backgroundColor = color;
+}
