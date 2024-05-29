@@ -1,8 +1,8 @@
 const users = {
-    'hassan': {password: 'H@5san45', role: 'admin'},
-    'siddiq': {password: '5iddiq45', role: 'user'},
-    'kamel': {password: 'K@mel45', role: 'user'},
-    'formatrice': {password: 'F0rm@trice45', role: 'formatrice'}
+    'hassan': {password: 'password123', role: 'admin'},
+    'siddiq': {password: 'password456', role: 'user'},
+    'kamel': {password: 'password789', role: 'user'},
+    'formatrice': {password: 'password111', role: 'formatrice'}
 };
 
 function login() {
@@ -30,11 +30,14 @@ function logout() {
 function showUserInterface(role, username) {
     if (role === 'admin') {
         document.getElementById('adminApp').classList.remove('d-none');
+        addDaysColumns('admin');
     } else if (role === 'user') {
         document.getElementById('restrictedApp').classList.remove('d-none');
         document.getElementById('restrictedUserName').textContent = username.toUpperCase();
+        addDaysColumns('restricted');
     } else if (role === 'formatrice') {
         document.getElementById('formatriceApp').classList.remove('d-none');
+        addDaysColumns('formatrice');
     }
 }
 
@@ -64,7 +67,6 @@ function addRow(student = { name: '', phone: '', email: '', infopreneur: '' }, t
     const phoneCell = newRow.insertCell(1);
     const emailCell = newRow.insertCell(2);
     const infopreneurCell = newRow.insertCell(3);
-    const actionCell = newRow.insertCell(4);
 
     nameCell.innerHTML = `<input type="text" class="form-control" value="${student.name}" ${type === 'restricted' ? 'readonly' : ''}>`;
     phoneCell.innerHTML = `<input type="text" class="form-control" value="${student.phone}" ${type === 'restricted' ? 'readonly' : ''}>`;
@@ -75,18 +77,42 @@ function addRow(student = { name: '', phone: '', email: '', infopreneur: '' }, t
             <option value="SIDDIQ" ${student.infopreneur === 'SIDDIQ' ? 'selected' : ''}>SIDDIQ</option>
             <option value="KAMEL" ${student.infopreneur === 'KAMEL' ? 'selected' : ''}>KAMEL</option>
         </select>`;
-    actionCell.innerHTML = `<button onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button>`;
 
-    for (let i = 5; i < 13; i++) {
-        const cell = newRow.insertCell(i);
+    addDaysCells(newRow, type);
+}
+
+function addDaysCells(row, type) {
+    const actionsCol = type === 'admin' ? document.getElementById('actionsCol') : type === 'restricted' ? document.getElementById('actionsColRestricted') : document.getElementById('actionsColForm');
+    const daysCount = actionsCol.children.length - 1; // -1 to exclude the "+" button
+    for (let i = 0; i < daysCount; i++) {
+        const cell = row.insertCell();
         cell.innerHTML = `
             <select class="form-control select-presence" ${type === 'restricted' ? 'disabled' : ''}>
                 <option value="Présent">Présent</option>
                 <option value="Absent">Absent</option>
                 <option value="Retard">Retard</option>
-            </select>
-        `;
+            </select>`;
     }
+}
+
+function addDaysColumns(type) {
+    const tableId = type === 'admin' ? 'attendanceTable' : type === 'restricted' ? 'restrictedTable' : 'formatriceTable';
+    const table = document.getElementById(tableId);
+    const headerRow = table.querySelector('thead tr');
+    const actionsCol = type === 'admin' ? document.getElementById('actionsCol') : type === 'restricted' ? document.getElementById('actionsColRestricted') : document.getElementById('actionsColForm');
+
+    for (let i = 1; i <= 8; i++) {
+        const th = document.createElement('th');
+        th.style.minWidth = '150px';
+        th.innerHTML = `Jour ${i} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
+        headerRow.appendChild(th);
+    }
+
+    const addColButton = document.createElement('button');
+    addColButton.textContent = '+';
+    addColButton.className = 'btn btn-sm btn-add-column';
+    addColButton.onclick = () => addColumn();
+    actionsCol.appendChild(addColButton);
 }
 
 function removeRow(button) {
@@ -99,10 +125,10 @@ function addColumn() {
     tables.forEach(tableId => {
         const table = document.getElementById(tableId);
         const headers = table.querySelector('thead tr');
-        if (headers.cells.length < 13) {
+        if (headers.cells.length < 14) {
             const headerCell = document.createElement('th');
             headerCell.style.minWidth = '150px';
-            headerCell.innerHTML = `Jour ${headers.cells.length - 4} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
+            headerCell.innerHTML = `Jour ${headers.cells.length - 3} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
             headers.appendChild(headerCell);
 
             const rows = table.querySelector('tbody').rows;
@@ -132,6 +158,20 @@ function removeColumn(button) {
         for (let row of rows) {
             row.deleteCell(index);
         }
+    });
+    reorderDaysColumns();
+}
+
+function reorderDaysColumns() {
+    const tables = ['attendanceTable', 'formatriceTable', 'restrictedTable'];
+    tables.forEach(tableId => {
+        const table = document.getElementById(tableId);
+        const headerRow = table.querySelector('thead tr');
+        const dayHeaders = Array.from(headerRow.children).slice(5, -1); // exclude fixed columns and "+" button
+
+        dayHeaders.forEach((th, index) => {
+            th.innerHTML = `Jour ${index + 1} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
+        });
     });
 }
 
