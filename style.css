@@ -42,12 +42,6 @@ input[type="text"], input[type="color"] {
     margin-bottom: 10px;
 }
 
-#attendanceTable th, #attendanceTable td {
-    resize: horizontal;
-    overflow: auto;
-    min-width: 100px;
-}
-
 .table-responsive {
     overflow-x: auto;
     overflow-y: auto;
