@@ -1,11 +1,21 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.night-mode {
+    background-color: #333;
+    color: #f4f4f4;
+}
+
+.day-mode {
+    background-color: #ffffff;
     color: #333;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 100%;
 }
 
 #adminApp, #restrictedApp, #formatriceApp {
@@ -14,7 +24,6 @@ body {
 
 thead th {
     text-align: center;
-    min-width: 150px;
     background-color: #f2f2f2;
 }
 
@@ -31,4 +40,13 @@ input[type="text"], input[type="color"] {
     resize: horizontal;
     overflow: auto;
     min-width: 100px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+th, td {
+    min-width: 150px;
 }
