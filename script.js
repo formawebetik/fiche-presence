@@ -1,8 +1,8 @@
 const users = {
-    'hassan': {password: 'H@5san45', role: 'admin'},
-    'siddiq': {password: '5iddiq45', role: 'user'},
-    'kamel': {password: 'K@mel45', role: 'user'},
-    'formatrice': {password: 'F0rm@trice45', role: 'formatrice'}
+    'hassan': {password: 'password123', role: 'admin'},
+    'siddiq': {password: 'password456', role: 'user'},
+    'kamel': {password: 'password789', role: 'user'},
+    'formatrice': {password: 'password111', role: 'formatrice'}
 };
 
 function login() {
