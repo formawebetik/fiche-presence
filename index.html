@@ -40,7 +40,6 @@
                 <input type="color" id="colorPicker" class="form-control" onchange="changeTableColor()">
             </div>
             <button onclick="addRow('admin')" class="btn btn-success mb-3">Ajouter un élève</button>
-            <button onclick="addColumn()" class="btn btn-secondary mb-3">Ajouter une colonne</button>
             <button onclick="toggleMode()" class="btn btn-info mb-3">Toggle Mode Nuit/Jour</button>
             <div class="form-group">
                 <label for="filterInfopreneur">Filtrer par infopreneur</label>
@@ -59,15 +58,7 @@
                             <th style="min-width: 200px;">Numéro de téléphone</th>
                             <th style="min-width: 250px;">Email</th>
                             <th style="min-width: 150px;">Infopreneur</th>
-                            <th style="min-width: 150px;">Actions</th>
-                            <th style="min-width: 150px;">Jour 1 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
-                            <th style="min-width: 150px;">Jour 2 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
-                            <th style="min-width: 150px;">Jour 3 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
-                            <th style="min-width: 150px;">Jour 4 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
-                            <th style="min-width: 150px;">Jour 5 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
-                            <th style="min-width: 150px;">Jour 6 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
-                            <th style="min-width: 150px;">Jour 7 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
-                            <th style="min-width: 150px;">Jour 8 <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button></th>
+                            <th id="actionsCol" style="min-width: 50px;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -97,14 +88,7 @@
                             <th>Numéro de téléphone</th>
                             <th>Email</th>
                             <th>Infopreneur</th>
-                            <th>Jour 1</th>
-                            <th>Jour 2</th>
-                            <th>Jour 3</th>
-                            <th>Jour 4</th>
-                            <th>Jour 5</th>
-                            <th>Jour 6</th>
-                            <th>Jour 7</th>
-                            <th>Jour 8</th>
+                            <th id="actionsColRestricted"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,14 +115,7 @@
                             <th>Nom de l'élève</th>
                             <th>Numéro de téléphone</th>
                             <th>Email</th>
-                            <th>Jour 1</th>
-                            <th>Jour 2</th>
-                            <th>Jour 3</th>
-                            <th>Jour 4</th>
-                            <th>Jour 5</th>
-                            <th>Jour 6</th>
-                            <th>Jour 7</th>
-                            <th>Jour 8</th>
+                            <th id="actionsColForm"></th>
                         </tr>
                     </thead>
                     <tbody>
