@@ -25,16 +25,16 @@
             </div>
         </div>
 
-        <div id="attendanceApp" class="d-none">
-            <div class="form-group">
-                <label for="tableTitle">Titre du tableau</label>
-                <input type="text" id="tableTitle" class="form-control" placeholder="Entrez le titre du tableau" oninput="updateTableTitle()">
-            </div>
-            <h1 id="dynamicTitle" class="text-center"></h1>
+        <div id="adminApp" class="d-none">
+            <h1 class="text-center">Espace Administrateur</h1>
+            <button onclick="logout()" class="btn btn-danger mb-3">Se déconnecter</button>
             <div class="form-group">
                 <label for="colorPicker">Choisissez une couleur</label>
                 <input type="color" id="colorPicker" class="form-control" onchange="changeTableColor()">
             </div>
+            <button onclick="addRow()" class="btn btn-success mb-3">Ajouter un élève</button>
+            <button onclick="addColumn()" class="btn btn-secondary mb-3">Ajouter une colonne</button>
+            <button onclick="removeLastColumn()" class="btn btn-warning mb-3">Supprimer la dernière colonne</button>
             <table id="attendanceTable" class="table table-bordered mt-3">
                 <thead class="thead-light">
                     <tr>
@@ -49,16 +49,4 @@
                         <th style="min-width: 100px;">Jour 6</th>
                         <th style="min-width: 100px;">Jour 7</th>
                         <th style="min-width: 100px;">Jour 8</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Les lignes seront ajoutées dynamiquement avec JavaScript -->
-                </tbody>
-            </table>
-            <button onclick="addRow()" class="btn btn-success">Ajouter un élève</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+       
