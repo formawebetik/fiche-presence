@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
 }
 
 #attendanceApp {
@@ -19,4 +19,18 @@ thead th {
 td select {
     width: 100%;
     padding: 5px;
+}
+
+.resizable th {
+    position: relative;
+}
+
+.resizable th:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    cursor: col-resize;
 }
