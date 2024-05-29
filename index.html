@@ -6,6 +6,7 @@
     <title>Fiche de Présence</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-resizable-columns/0.2.3/css/jquery.resizableColumns.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -26,8 +27,9 @@
         </div>
 
         <div id="attendanceApp" class="d-none">
-            <h1 class="text-center">Fiche de Présence des Élèves</h1>
-            <table id="attendanceTable" class="table table-bordered mt-3">
+            <input type="text" id="tableTitle" class="form-control mb-3" placeholder="Titre de la session">
+            <h1 id="dynamicTitle" class="text-center">Fiche de Présence des Élèves</h1>
+            <table id="attendanceTable" class="table table-bordered mt-3 resizable">
                 <thead class="thead-light">
                     <tr>
                         <th>Nom de l'élève</th>
@@ -48,9 +50,12 @@
                 </tbody>
             </table>
             <button onclick="addRow()" class="btn btn-success">Ajouter un élève</button>
+            <button onclick="changeColor()" class="btn btn-info">Changer Couleur</button>
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-resizable-columns/0.2.3/jquery.resizableColumns.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
