@@ -14,6 +14,8 @@ body {
 
 thead th {
     text-align: center;
+    min-width: 150px;
+    background-color: #f2f2f2;
 }
 
 td select {
@@ -21,16 +23,22 @@ td select {
     padding: 5px;
 }
 
-.resizable th {
-    position: relative;
+input[type="text"], input[type="color"] {
+    margin-bottom: 10px;
 }
 
-.resizable th:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 5px;
-    height: 100%;
-    cursor: col-resize;
+#attendanceTable th, #attendanceTable td {
+    resize: horizontal;
+    overflow: auto;
+    min-width: 100px;
+}
+
+.resize-container {
+    display: flex;
+    align-items: center;
+}
+
+.resize-container input[type="number"] {
+    margin-left: 10px;
+    width: 70px;
 }
