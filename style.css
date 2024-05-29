@@ -8,7 +8,7 @@ body {
     max-width: 800px;
 }
 
-#attendanceApp {
+#adminApp, #restrictedApp, #formatriceApp {
     margin-top: 20px;
 }
 
@@ -31,14 +31,4 @@ input[type="text"], input[type="color"] {
     resize: horizontal;
     overflow: auto;
     min-width: 100px;
-}
-
-.resize-container {
-    display: flex;
-    align-items: center;
-}
-
-.resize-container input[type="number"] {
-    margin-left: 10px;
-    width: 70px;
 }
