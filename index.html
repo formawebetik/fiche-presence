@@ -49,4 +49,75 @@
                         <th style="min-width: 100px;">Jour 6</th>
                         <th style="min-width: 100px;">Jour 7</th>
                         <th style="min-width: 100px;">Jour 8</th>
-       
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les lignes seront ajoutées dynamiquement avec JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="restrictedApp" class="d-none">
+            <h1 class="text-center">Espace Utilisateur Restreint</h1>
+            <button onclick="logout()" class="btn btn-danger mb-3">Se déconnecter</button>
+            <div class="form-group">
+                <label for="filterInfopreneur">Filtrer par infopreneur</label>
+                <select id="filterInfopreneur" class="form-control" onchange="filterTable()">
+                    <option value="all">Tous</option>
+                    <option value="HASSAN">HASSAN</option>
+                    <option value="SIDDIQ">SIDDIQ</option>
+                    <option value="KAMEL">KAMEL</option>
+                </select>
+            </div>
+            <table id="restrictedTable" class="table table-bordered mt-3">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Nom de l'élève</th>
+                        <th>Numéro de téléphone</th>
+                        <th>Email</th>
+                        <th>Jour 1</th>
+                        <th>Jour 2</th>
+                        <th>Jour 3</th>
+                        <th>Jour 4</th>
+                        <th>Jour 5</th>
+                        <th>Jour 6</th>
+                        <th>Jour 7</th>
+                        <th>Jour 8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les lignes seront ajoutées dynamiquement avec JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="formatriceApp" class="d-none">
+            <h1 class="text-center">Espace Formatrice</h1>
+            <button onclick="logout()" class="btn btn-danger mb-3">Se déconnecter</button>
+            <button onclick="addRow()" class="btn btn-success mb-3">Ajouter un élève</button>
+            <table id="formatriceTable" class="table table-bordered mt-3">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Nom de l'élève</th>
+                        <th>Numéro de téléphone</th>
+                        <th>Email</th>
+                        <th>Jour 1</th>
+                        <th>Jour 2</th>
+                        <th>Jour 3</th>
+                        <th>Jour 4</th>
+                        <th>Jour 5</th>
+                        <th>Jour 6</th>
+                        <th>Jour 7</th>
+                        <th>Jour 8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les lignes seront ajoutées dynamiquement avec JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
