@@ -12,7 +12,7 @@ function login() {
 
     if (users[username] && users[username].password === password) {
         document.getElementById('loginForm').classList.add('d-none');
-        showUserInterface(users[username].role);
+        showUserInterface(users[username].role, username);
         loginError.textContent = '';
         loadPreferences(username);
     } else {
@@ -27,11 +27,12 @@ function logout() {
     document.getElementById('formatriceApp').classList.add('d-none');
 }
 
-function showUserInterface(role) {
+function showUserInterface(role, username) {
     if (role === 'admin') {
         document.getElementById('adminApp').classList.remove('d-none');
     } else if (role === 'user') {
         document.getElementById('restrictedApp').classList.remove('d-none');
+        document.getElementById('restrictedUserName').textContent = username.toUpperCase();
     } else if (role === 'formatrice') {
         document.getElementById('formatriceApp').classList.remove('d-none');
     }
@@ -79,8 +80,20 @@ function addRow(student = { name: '', phone: '', email: '', infopreneur: '' }, t
 
     if (type !== 'formatrice') {
         const infopreneurCell = newRow.insertCell(11);
-        infopreneurCell.innerHTML = `<input type="text" class="form-control" value="${student.infopreneur}" readonly>`;
+        infopreneurCell.innerHTML = `
+            <select class="form-control" ${type === 'restricted' ? 'disabled' : ''}>
+                <option value="HASSAN">HASSAN</option>
+                <option value="SIDDIQ">SIDDIQ</option>
+                <option value="KAMEL">KAMEL</option>
+            </select>`;
+        const actionCell = newRow.insertCell(12);
+        actionCell.innerHTML = `<button onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button>`;
     }
+}
+
+function removeRow(button) {
+    const row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
 }
 
 function addColumn() {
@@ -91,7 +104,7 @@ function addColumn() {
         if (headers.cells.length < 12) {
             const headerCell = document.createElement('th');
             headerCell.style.minWidth = '150px';
-            headerCell.textContent = `Jour ${headers.cells.length - 2}`;
+            headerCell.textContent = `Jour ${headers.cells.length - 2} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
             headers.appendChild(headerCell);
 
             const rows = table.querySelector('tbody').rows;
@@ -105,6 +118,21 @@ function addColumn() {
                     </select>
                 `;
             }
+        }
+    });
+}
+
+function removeColumn(button) {
+    const index = button.parentNode.cellIndex;
+    const tables = ['attendanceTable', 'formatriceTable', 'restrictedTable'];
+    tables.forEach(tableId => {
+        const table = document.getElementById(tableId);
+        const headers = table.querySelector('thead tr');
+        headers.deleteCell(index);
+
+        const rows = table.querySelector('tbody').rows;
+        for (let row of rows) {
+            row.deleteCell(index);
         }
     });
 }
@@ -146,7 +174,7 @@ function filterTable() {
     const filterValue = document.getElementById('filterInfopreneur').value;
     const table = document.getElementById('restrictedTable').getElementsByTagName('tbody')[0];
     for (let row of table.rows) {
-        const infopreneurCell = row.cells[11].querySelector('input').value;
+        const infopreneurCell = row.cells[11].querySelector('select').value;
         if (filterValue === 'all' || infopreneurCell.includes(filterValue)) {
             row.style.display = '';
         } else {
