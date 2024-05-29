@@ -37,6 +37,12 @@ function showUserInterface(role) {
     }
 }
 
+function checkEnter(event) {
+    if (event.key === 'Enter') {
+        login();
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const initialData = [
         { name: 'Élève 1', phone: '0123456789', email: 'eleve1@example.com', infopreneur: 'HASSAN' },
@@ -103,21 +109,6 @@ function addColumn() {
     });
 }
 
-function removeLastColumn() {
-    const tables = ['attendanceTable', 'formatriceTable', 'restrictedTable'];
-    tables.forEach(tableId => {
-        const table = document.getElementById(tableId);
-        const headers = table.querySelector('thead tr');
-        if (headers.cells.length > 4) {
-            headers.deleteCell(-1);
-            const rows = table.querySelector('tbody').rows;
-            for (let row of rows) {
-                row.deleteCell(-1);
-            }
-        }
-    });
-}
-
 function changeTableColor() {
     const color = document.getElementById('colorPicker').value;
     const tables = ['attendanceTable', 'formatriceTable', 'restrictedTable'];
@@ -167,9 +158,11 @@ function filterTable() {
 function updateTableTitle() {
     const title = document.getElementById('tableTitle').value;
     document.getElementById('dynamicTitle').textContent = title;
+}
 
-    const titleForm = document.getElementById('tableTitleForm').value;
-    document.getElementById('dynamicTitleForm').textContent = titleForm;
+function updateTableTitleForm() {
+    const title = document.getElementById('tableTitleForm').value;
+    document.getElementById('dynamicTitleForm').textContent = title;
 }
 
 function toggleMode() {
