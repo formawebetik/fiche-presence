@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+}
+
+#attendanceApp {
+    margin-top: 20px;
+}
+
+thead th {
+    text-align: center;
+}
+
+td select {
+    width: 100%;
+    padding: 5px;
+}
