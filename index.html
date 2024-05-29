@@ -6,7 +6,6 @@
     <title>Fiche de Présence</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-resizable-columns/0.2.3/css/jquery.resizableColumns.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -27,22 +26,29 @@
         </div>
 
         <div id="attendanceApp" class="d-none">
-            <input type="text" id="tableTitle" class="form-control mb-3" placeholder="Titre de la session">
-            <h1 id="dynamicTitle" class="text-center">Fiche de Présence des Élèves</h1>
-            <table id="attendanceTable" class="table table-bordered mt-3 resizable">
+            <div class="form-group">
+                <label for="tableTitle">Titre du tableau</label>
+                <input type="text" id="tableTitle" class="form-control" placeholder="Entrez le titre du tableau" oninput="updateTableTitle()">
+            </div>
+            <h1 id="dynamicTitle" class="text-center"></h1>
+            <div class="form-group">
+                <label for="colorPicker">Choisissez une couleur</label>
+                <input type="color" id="colorPicker" class="form-control" onchange="changeTableColor()">
+            </div>
+            <table id="attendanceTable" class="table table-bordered mt-3">
                 <thead class="thead-light">
                     <tr>
-                        <th>Nom de l'élève</th>
-                        <th>Numéro de téléphone</th>
-                        <th>Email</th>
-                        <th>Jour 1</th>
-                        <th>Jour 2</th>
-                        <th>Jour 3</th>
-                        <th>Jour 4</th>
-                        <th>Jour 5</th>
-                        <th>Jour 6</th>
-                        <th>Jour 7</th>
-                        <th>Jour 8</th>
+                        <th style="min-width: 150px;">Nom de l'élève</th>
+                        <th style="min-width: 200px;">Numéro de téléphone</th>
+                        <th style="min-width: 250px;">Email</th>
+                        <th style="min-width: 100px;">Jour 1</th>
+                        <th style="min-width: 100px;">Jour 2</th>
+                        <th style="min-width: 100px;">Jour 3</th>
+                        <th style="min-width: 100px;">Jour 4</th>
+                        <th style="min-width: 100px;">Jour 5</th>
+                        <th style="min-width: 100px;">Jour 6</th>
+                        <th style="min-width: 100px;">Jour 7</th>
+                        <th style="min-width: 100px;">Jour 8</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,12 +56,9 @@
                 </tbody>
             </table>
             <button onclick="addRow()" class="btn btn-success">Ajouter un élève</button>
-            <button onclick="changeColor()" class="btn btn-info">Changer Couleur</button>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-resizable-columns/0.2.3/jquery.resizableColumns.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
