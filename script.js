@@ -1,7 +1,8 @@
 const users = {
-    'hassan': 'password123',
+    'hassan': 'password725',
     'siddiq': 'password456',
-    'kamel': 'password789'
+    'kamel': 'password789',
+    'Formatrice': 'password546'
 };
 
 function login() {
