@@ -68,8 +68,8 @@ function addRow(student = { name: '', phone: '', email: '', infopreneur: '' }, t
     const emailCell = newRow.insertCell(2);
     const infopreneurCell = newRow.insertCell(3);
 
-    nameCell.innerHTML = `<input type="text" class="form-control" value="${student.name}" ${type === 'restricted' ? 'readonly' : ''}>`;
-    phoneCell.innerHTML = `<input type="text" class="form-control" value="${student.phone}" ${type === 'restricted' ? 'readonly' : ''}>`;
+    nameCell.innerHTML = `<input type="text" class="form-control" value="${student.name}" style="white-space: pre-wrap;" ${type === 'restricted' ? 'readonly' : ''}>`;
+    phoneCell.innerHTML = `<input type="text" class="form-control" value="${student.phone}" maxlength="10" ${type === 'restricted' ? 'readonly' : ''}>`;
     emailCell.innerHTML = `<input type="text" class="form-control" value="${student.email}" ${type === 'restricted' ? 'readonly' : ''}>`;
     infopreneurCell.innerHTML = `
         <select class="form-control" ${type === 'restricted' ? 'disabled' : ''}>
@@ -128,7 +128,7 @@ function addColumn() {
         if (headers.cells.length < 14) {
             const headerCell = document.createElement('th');
             headerCell.style.minWidth = '150px';
-            headerCell.innerHTML = `Jour ${headers.cells.length - 3} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
+            headerCell.innerHTML = `Jour ${headers.cells.length - 4} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
             headers.appendChild(headerCell);
 
             const rows = table.querySelector('tbody').rows;
@@ -167,7 +167,7 @@ function reorderDaysColumns() {
     tables.forEach(tableId => {
         const table = document.getElementById(tableId);
         const headerRow = table.querySelector('thead tr');
-        const dayHeaders = Array.from(headerRow.children).slice(5, -1); // exclude fixed columns and "+" button
+        const dayHeaders = Array.from(headerRow.children).slice(4, -1); // exclude fixed columns and "+" button
 
         dayHeaders.forEach((th, index) => {
             th.innerHTML = `Jour ${index + 1} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
