@@ -63,11 +63,21 @@ function addRow(student = { name: '', phone: '', email: '', infopreneur: '' }, t
     const nameCell = newRow.insertCell(0);
     const phoneCell = newRow.insertCell(1);
     const emailCell = newRow.insertCell(2);
+    const infopreneurCell = newRow.insertCell(3);
+    const actionCell = newRow.insertCell(4);
+
     nameCell.innerHTML = `<input type="text" class="form-control" value="${student.name}" ${type === 'restricted' ? 'readonly' : ''}>`;
     phoneCell.innerHTML = `<input type="text" class="form-control" value="${student.phone}" ${type === 'restricted' ? 'readonly' : ''}>`;
     emailCell.innerHTML = `<input type="text" class="form-control" value="${student.email}" ${type === 'restricted' ? 'readonly' : ''}>`;
+    infopreneurCell.innerHTML = `
+        <select class="form-control" ${type === 'restricted' ? 'disabled' : ''}>
+            <option value="HASSAN" ${student.infopreneur === 'HASSAN' ? 'selected' : ''}>HASSAN</option>
+            <option value="SIDDIQ" ${student.infopreneur === 'SIDDIQ' ? 'selected' : ''}>SIDDIQ</option>
+            <option value="KAMEL" ${student.infopreneur === 'KAMEL' ? 'selected' : ''}>KAMEL</option>
+        </select>`;
+    actionCell.innerHTML = `<button onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button>`;
 
-    for (let i = 3; i < 11; i++) {
+    for (let i = 5; i < 13; i++) {
         const cell = newRow.insertCell(i);
         cell.innerHTML = `
             <select class="form-control select-presence" ${type === 'restricted' ? 'disabled' : ''}>
@@ -76,18 +86,6 @@ function addRow(student = { name: '', phone: '', email: '', infopreneur: '' }, t
                 <option value="Retard">Retard</option>
             </select>
         `;
-    }
-
-    if (type !== 'formatrice') {
-        const infopreneurCell = newRow.insertCell(11);
-        infopreneurCell.innerHTML = `
-            <select class="form-control" ${type === 'restricted' ? 'disabled' : ''}>
-                <option value="HASSAN">HASSAN</option>
-                <option value="SIDDIQ">SIDDIQ</option>
-                <option value="KAMEL">KAMEL</option>
-            </select>`;
-        const actionCell = newRow.insertCell(12);
-        actionCell.innerHTML = `<button onclick="removeRow(this)" class="btn btn-sm btn-danger">-</button>`;
     }
 }
 
@@ -101,10 +99,10 @@ function addColumn() {
     tables.forEach(tableId => {
         const table = document.getElementById(tableId);
         const headers = table.querySelector('thead tr');
-        if (headers.cells.length < 12) {
+        if (headers.cells.length < 13) {
             const headerCell = document.createElement('th');
             headerCell.style.minWidth = '150px';
-            headerCell.textContent = `Jour ${headers.cells.length - 2} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
+            headerCell.innerHTML = `Jour ${headers.cells.length - 4} <button onclick="removeColumn(this)" class="btn btn-sm btn-danger">-</button>`;
             headers.appendChild(headerCell);
 
             const rows = table.querySelector('tbody').rows;
@@ -174,7 +172,7 @@ function filterTable() {
     const filterValue = document.getElementById('filterInfopreneur').value;
     const table = document.getElementById('restrictedTable').getElementsByTagName('tbody')[0];
     for (let row of table.rows) {
-        const infopreneurCell = row.cells[11].querySelector('select').value;
+        const infopreneurCell = row.cells[3].querySelector('select').value;
         if (filterValue === 'all' || infopreneurCell.includes(filterValue)) {
             row.style.display = '';
         } else {
