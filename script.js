@@ -39,8 +39,8 @@ function showUserInterface(role) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const initialData = [
-        { name: 'Élève 1', phone: '0123456789', email: 'eleve1@example.com' },
-        { name: 'Élève 2', phone: '0987654321', email: 'eleve2@example.com' },
+        { name: 'Élève 1', phone: '0123456789', email: 'eleve1@example.com', infopreneur: 'HASSAN' },
+        { name: 'Élève 2', phone: '0987654321', email: 'eleve2@example.com', infopreneur: 'SIDDIQ' },
     ];
 
     initialData.forEach(student => addRow(student, 'admin'));
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initialData.forEach(student => addRow(student, 'restricted'));
 });
 
-function addRow(student = { name: '', phone: '', email: '' }, type) {
+function addRow(student = { name: '', phone: '', email: '', infopreneur: '' }, type) {
     const tableId = type === 'admin' ? 'attendanceTable' : type === 'formatrice' ? 'formatriceTable' : 'restrictedTable';
     const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
@@ -66,8 +66,14 @@ function addRow(student = { name: '', phone: '', email: '' }, type) {
             <select class="form-control select-presence" ${type === 'restricted' ? 'disabled' : ''}>
                 <option value="Présent">Présent</option>
                 <option value="Absent">Absent</option>
+                <option value="Retard">Retard</option>
             </select>
         `;
+    }
+
+    if (type !== 'formatrice') {
+        const infopreneurCell = newRow.insertCell(11);
+        infopreneurCell.innerHTML = `<input type="text" class="form-control" value="${student.infopreneur}" readonly>`;
     }
 }
 
@@ -76,20 +82,23 @@ function addColumn() {
     tables.forEach(tableId => {
         const table = document.getElementById(tableId);
         const headers = table.querySelector('thead tr');
-        const headerCell = document.createElement('th');
-        headerCell.style.minWidth = '100px';
-        headerCell.textContent = `Jour ${headers.cells.length - 2}`;
-        headers.appendChild(headerCell);
+        if (headers.cells.length < 12) {
+            const headerCell = document.createElement('th');
+            headerCell.style.minWidth = '150px';
+            headerCell.textContent = `Jour ${headers.cells.length - 2}`;
+            headers.appendChild(headerCell);
 
-        const rows = table.querySelector('tbody').rows;
-        for (let row of rows) {
-            const cell = row.insertCell();
-            cell.innerHTML = `
-                <select class="form-control select-presence">
-                    <option value="Présent">Présent</option>
-                    <option value="Absent">Absent</option>
-                </select>
-            `;
+            const rows = table.querySelector('tbody').rows;
+            for (let row of rows) {
+                const cell = row.insertCell();
+                cell.innerHTML = `
+                    <select class="form-control select-presence">
+                        <option value="Présent">Présent</option>
+                        <option value="Absent">Absent</option>
+                        <option value="Retard">Retard</option>
+                    </select>
+                `;
+            }
         }
     });
 }
@@ -146,11 +155,30 @@ function filterTable() {
     const filterValue = document.getElementById('filterInfopreneur').value;
     const table = document.getElementById('restrictedTable').getElementsByTagName('tbody')[0];
     for (let row of table.rows) {
-        const nameCell = row.cells[0].querySelector('input').value;
-        if (filterValue === 'all' || nameCell.includes(filterValue)) {
+        const infopreneurCell = row.cells[11].querySelector('input').value;
+        if (filterValue === 'all' || infopreneurCell.includes(filterValue)) {
             row.style.display = '';
         } else {
             row.style.display = 'none';
         }
+    }
+}
+
+function updateTableTitle() {
+    const title = document.getElementById('tableTitle').value;
+    document.getElementById('dynamicTitle').textContent = title;
+
+    const titleForm = document.getElementById('tableTitleForm').value;
+    document.getElementById('dynamicTitleForm').textContent = titleForm;
+}
+
+function toggleMode() {
+    const body = document.body;
+    if (body.classList.contains('day-mode')) {
+        body.classList.remove('day-mode');
+        body.classList.add('night-mode');
+    } else {
+        body.classList.remove('night-mode');
+        body.classList.add('day-mode');
     }
 }
