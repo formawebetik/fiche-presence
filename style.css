@@ -50,3 +50,9 @@ input[type="text"], input[type="color"] {
 th, td {
     min-width: 150px;
 }
+
+.btn-add-column {
+    margin-left: 10px;
+    background-color: #28a745;
+    color: white;
+}
