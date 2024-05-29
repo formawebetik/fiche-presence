@@ -11,14 +11,15 @@
     <div class="container mt-5">
         <div id="loginForm" class="card">
             <div class="card-body">
-                <h3 class="card-title">Connexion</h3>
+                <h1 class="card-title">👋 Marhaban !</h1>
+                <h3 class="card-subtitle mb-2 text-muted">Cet espace vous permettra de visualiser les présences des élèves en formations</h3>
                 <div class="form-group">
                     <label for="username">Identifiant</label>
-                    <input type="text" id="username" class="form-control">
+                    <input type="text" id="username" class="form-control" onkeypress="checkEnter(event)">
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" class="form-control">
+                    <input type="password" id="password" class="form-control" onkeypress="checkEnter(event)">
                 </div>
                 <button onclick="login()" class="btn btn-primary">Se connecter</button>
                 <div id="loginError" class="text-danger mt-3"></div>
@@ -29,7 +30,8 @@
             <h1 class="text-center">Espace Administrateur</h1>
             <div class="form-group">
                 <label for="tableTitle">Titre du tableau</label>
-                <input type="text" id="tableTitle" class="form-control" placeholder="Entrez le titre du tableau" oninput="updateTableTitle()">
+                <input type="text" id="tableTitle" class="form-control" placeholder="Entrez le titre du tableau">
+                <button onclick="updateTableTitle()" class="btn btn-primary mt-2">Valider le titre</button>
             </div>
             <h2 id="dynamicTitle" class="text-center"></h2>
             <button onclick="logout()" class="btn btn-danger mb-3">Se déconnecter</button>
@@ -39,7 +41,6 @@
             </div>
             <button onclick="addRow('admin')" class="btn btn-success mb-3">Ajouter un élève</button>
             <button onclick="addColumn()" class="btn btn-secondary mb-3">Ajouter une colonne</button>
-            <button onclick="removeLastColumn()" class="btn btn-warning mb-3">Supprimer la dernière colonne</button>
             <button onclick="toggleMode()" class="btn btn-info mb-3">Toggle Mode Nuit/Jour</button>
             <div class="table-responsive">
                 <table id="attendanceTable" class="table table-bordered mt-3">
@@ -106,8 +107,9 @@
         <div id="formatriceApp" class="d-none">
             <h1 class="text-center">Espace Formatrice</h1>
             <div class="form-group">
-                <label for="tableTitle">Titre du tableau</label>
-                <input type="text" id="tableTitleForm" class="form-control" placeholder="Entrez le titre du tableau" oninput="updateTableTitle()">
+                <label for="tableTitleForm">Titre du tableau</label>
+                <input type="text" id="tableTitleForm" class="form-control" placeholder="Entrez le titre du tableau">
+                <button onclick="updateTableTitleForm()" class="btn btn-primary mt-2">Valider le titre</button>
             </div>
             <h2 id="dynamicTitleForm" class="text-center"></h2>
             <button onclick="logout()" class="btn btn-danger mb-3">Se déconnecter</button>
